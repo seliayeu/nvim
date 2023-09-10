@@ -1,6 +1,17 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "rust_analyzer" },
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "eslint",
+    "tailwindcss",
+    "svelte",
+    "tsserver",
+    "eslint",
+    "prismals",
+    "pyright",
+    "clangd",
+  },
 }
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
@@ -43,6 +54,30 @@ require("lspconfig")["tsserver"].setup {
     importModuleSpecifierPreference = "relative",
     jsxAttributeCompletionStyle = "none"
   }
+}
+
+require("lspconfig")["eslint"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "eslint") end,
+  capabilities = capabilities,
+}
+
+require("lspconfig")["svelte"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "svelte") end,
+  capabilities = capabilities,
+}
+
+require("lspconfig")["pyright"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "python") end,
+  capabilities = capabilities,
+}
+
+require("lspconfig")["prismals"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "prisma") end,
+  capabilities = capabilities,
+}
+require("lspconfig")["tailwindcss"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "tailwindcss") end,
+  capabilities = capabilities,
 }
 
 local rt = require("rust-tools")
