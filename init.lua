@@ -136,6 +136,7 @@ require("lazy").setup({
   },
 })
 
+
 require("text")
 require("color")
 require("remap")

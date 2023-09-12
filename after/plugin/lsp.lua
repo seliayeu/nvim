@@ -75,9 +75,19 @@ require("lspconfig")["prismals"].setup {
   on_attach = function(client, bufnr) on_attach(client, bufnr, "prisma") end,
   capabilities = capabilities,
 }
+
 require("lspconfig")["tailwindcss"].setup {
   on_attach = function(client, bufnr) on_attach(client, bufnr, "tailwindcss") end,
   capabilities = capabilities,
+}
+
+require("lspconfig")["clangd"].setup {
+  on_attach = function(client, bufnr) on_attach(client, bufnr, "clangd") end,
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
 }
 
 local rt = require("rust-tools")
