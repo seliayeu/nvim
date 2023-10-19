@@ -47,10 +47,10 @@ require("lazy").setup({
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/nvim-cmp",
+  "L3MON4D3/LuaSnip",
+  "saadparwaiz1/cmp_luasnip",
   "onsails/lspkind-nvim",
   "glepnir/lspsaga.nvim",
-
-  "L3MON4D3/LuaSnip",
 
   "jose-elias-alvarez/typescript.nvim",
 
@@ -75,7 +75,7 @@ require("lazy").setup({
   },
 
   {
-    "windwp/nvim-ts-autotag",
+    "gungun974/nvim-ts-autotag",
     dependencies = "nvim-treesitter/nvim-treesitter",
     lazy = true,
     event = "VeryLazy"
@@ -86,7 +86,10 @@ require("lazy").setup({
   "axelvc/template-string.nvim",
 
   "folke/todo-comments.nvim",
-  "numToStr/Comment.nvim",
+  {
+    "numToStr/Comment.nvim",
+    lazy = 'false'
+  },
   "akinsho/toggleterm.nvim",
 
   "tpope/vim-obsession",
@@ -135,7 +138,6 @@ require("lazy").setup({
     },
   },
 })
-
 
 require("text")
 require("color")
