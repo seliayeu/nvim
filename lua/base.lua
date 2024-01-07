@@ -1,4 +1,4 @@
-vim.api.nvim_exec('language en_US', true)
+vim.api.nvim_exec('language en_US.UTF-8', true)
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -36,10 +36,10 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = true
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank({
-            timeout = 300,
-            higroup = "IncSearch",
-        })
-    end
+  callback = function()
+    vim.highlight.on_yank({
+      timeout = 300,
+      higroup = "IncSearch",
+    })
+  end
 })
