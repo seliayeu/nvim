@@ -103,6 +103,18 @@ return {
       capabilities = capabilities,
     }
 
+    require("lspconfig")["ltex"].setup {
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr, "latex")
+        vim.keymap.set('n', '<localleader>lc', '<cmd>VimtexClean<cr>')
+        vim.keymap.set('n', '<localleader>li', '<cmd>VimtexInfo<cr>')
+        vim.keymap.set('n', '<localleader>li', '<cmd>VimtexCompile<cr>')
+        vim.keymap.set('n', '<localleader>le', '<cmd>VimtexErrors<cr>')
+        vim.keymap.set('n', '<localleader>lv', '<cmd>VimtexView<cr>')
+      end,
+      capabilities = capabilities,
+    }
+
     require("lspconfig")["clangd"].setup {
       on_attach = function(client, bufnr) on_attach(client, bufnr, "clangd") end,
       capabilities = capabilities,

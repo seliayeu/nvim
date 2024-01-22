@@ -1,7 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require 'nvim-treesitter.configs'.setup {
@@ -29,7 +28,9 @@ return {
 
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        -- additional_vim_regex_highlighting = false,
+        disable = { "latex" },
+        additional_vim_regex_highlighting = { "latex", "markdown" },
       },
       indent = {
         enable = true,
