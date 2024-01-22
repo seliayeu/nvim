@@ -9,13 +9,18 @@ return {
     vim.opt.termguicolors = true
 
     require("nvim-tree").setup({
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
       sort_by = "case_sensitive",
       actions = {
-        open_file = { quit_on_open = true },
+        open_file = {
+          quit_on_open = true,
+        },
       },
       update_focused_file = {
         enable = true,
         update_cwd = true,
+        update_root = true,
       },
       filters = {
         custom = { '^.git$', '^node_modules$' }

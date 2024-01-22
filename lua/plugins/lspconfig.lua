@@ -32,22 +32,22 @@ return {
       local opts = { noremap = true, silent = true }
       client.server_capabilities.documentFormattingProvider = true
 
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
-        buffer = bufnr,
-        callback = function()
-          if lsp_name == "tsserver" then
-            require("typescript").actions.removeUnused({ sync = true })
-          end
-          vim.lsp.buf.format()
-        end
-      });
-
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-        command = 'silent! EslintFixAll',
-        group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
-      })
+      -- vim.api.nvim_create_autocmd("BufWritePre", {
+      --   group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+      --   buffer = bufnr,
+      --   callback = function()
+      --     if lsp_name == "tsserver" then
+      --       require("typescript").actions.removeUnused({ sync = true })
+      --     end
+      --     vim.lsp.buf.format()
+      --   end
+      -- });
+      --
+      -- vim.api.nvim_create_autocmd('BufWritePre', {
+      --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+      --   command = 'silent! EslintFixAll',
+      --   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+      -- })
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -121,6 +121,17 @@ return {
           vim.keymap.set("n", "<leader>s", rt.code_action_group.code_action_group, { buffer = bufnr })
           on_attach(client, bufnr, "rust")
         end,
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              enable = true,
+              command = "clippy",
+            },
+            cargo = {
+              allFeatures = true,
+            },
+          },
+        },
       },
     })
   end
