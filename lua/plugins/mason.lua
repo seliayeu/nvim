@@ -19,7 +19,7 @@ return {
         "pyright",
         "clangd",
         "cssls",
-        "ltex"
+        -- "ltex"
       },
     }
     require("mason-tool-installer").setup({})
