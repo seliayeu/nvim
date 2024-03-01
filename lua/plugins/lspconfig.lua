@@ -32,22 +32,13 @@ return {
       local opts = { noremap = true, silent = true }
       client.server_capabilities.documentFormattingProvider = true
 
-      -- vim.api.nvim_create_autocmd("BufWritePre", {
-      --   group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
-      --   buffer = bufnr,
-      --   callback = function()
-      --     if lsp_name == "tsserver" then
-      --       require("typescript").actions.removeUnused({ sync = true })
-      --     end
-      --     vim.lsp.buf.format()
-      --   end
-      -- });
-      --
-      -- vim.api.nvim_create_autocmd('BufWritePre', {
-      --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-      --   command = 'silent! EslintFixAll',
-      --   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
-      -- })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        -- group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+        -- buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end
+      });
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -58,7 +49,8 @@ return {
       settings = {
         Lua = {
           diagnostics = {
-            globals = { 'vim', 'mp' }
+            globals = { 'vim', 'mp', 'love' },
+            disable = { "lowercase-global", "redefined-local" }
           }
         }
       }
@@ -101,6 +93,14 @@ return {
     require("lspconfig")["cssls"].setup {
       on_attach = function(client, bufnr) on_attach(client, bufnr, "cssls") end,
       capabilities = capabilities,
+      settings = {
+        css = { validate = true,
+          lint = {
+            unknownAtRules = "ignore"
+          }
+        },
+
+      }
     }
 
     require("lspconfig")["clangd"].setup {

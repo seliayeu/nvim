@@ -40,11 +40,8 @@ return {
         filetypes = {
           'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx',
           'rescript',
-          'css', 'lua', 'xml', 'php', 'markdown'
+          'css', 'lua', 'xml', 'php', 'markdown', 'astro'
         },
-      },
-      context_commentstring = {
-        enable = true,
       },
     }
 

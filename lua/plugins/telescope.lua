@@ -6,6 +6,7 @@ return {
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
     vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
+    vim.keymap.set('n', '<leader>pc', function() builtin.live_grep { default_text = vim.fn.expand("<cword>") } end)
 
     local actions = require('telescope.actions')
     require('nvim-web-devicons').setup({
@@ -37,6 +38,5 @@ return {
       },
 
     }
-
   end
 }
