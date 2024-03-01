@@ -33,12 +33,25 @@ return {
       client.server_capabilities.documentFormattingProvider = true
 
       vim.api.nvim_create_autocmd("BufWritePre", {
-        -- group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
-        -- buffer = bufnr,
         callback = function()
           vim.lsp.buf.format({ async = false })
         end
       });
+      --   group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+      --   buffer = bufnr,
+      --   callback = function()
+      --     if lsp_name == "tsserver" then
+      --       require("typescript").actions.removeUnused({ sync = true })
+      --     end
+      --     vim.lsp.buf.format()
+      --   end
+      -- });
+      --
+      -- vim.api.nvim_create_autocmd('BufWritePre', {
+      --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+      --   command = 'silent! EslintFixAll',
+      --   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+      -- })
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -101,6 +114,18 @@ return {
         },
 
       }
+    }
+
+    require("lspconfig")["texlab"].setup {
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr, "latex")
+        vim.keymap.set('n', '<localleader>lc', '<cmd>VimtexClean<cr>')
+        vim.keymap.set('n', '<localleader>li', '<cmd>VimtexInfo<cr>')
+        vim.keymap.set('n', '<localleader>li', '<cmd>VimtexCompile<cr>')
+        vim.keymap.set('n', '<localleader>le', '<cmd>VimtexErrors<cr>')
+        vim.keymap.set('n', '<localleader>lv', '<cmd>VimtexView<cr>')
+      end,
+      capabilities = capabilities,
     }
 
     require("lspconfig")["clangd"].setup {
