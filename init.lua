@@ -1,9 +1,5 @@
-vim.g.mapleader = " "
-
-require("base")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -15,8 +11,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 
-require("text")
-require("color")
-require("remap")
+require("lazy").setup("plugins", { defaults = { lazy = true } })
+
+vim.o.ignorecase = true
+vim.o.wrap = false
+vim.o.so = 3
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
