@@ -28,7 +28,13 @@ return {
                   require("lspconfig")["lua_ls"].setup {
                     settings = { Lua = {
                         diagnostics = {
-                          globals = { "mpv", "vim" }
+                          globals = {
+                            "mpv",
+                            "vim",
+                            "awesome",
+                            "client",
+                            "root",
+                          }
                         }
                       }}
                   }
