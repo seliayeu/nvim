@@ -10,4 +10,8 @@ return {
     },
     picker = { enabled = true },
   },
+  keys = {
+    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+    { "<leader>re", function() Snacks.explorer.reveal() end, desc = "File Explorer" }
+  }
 }

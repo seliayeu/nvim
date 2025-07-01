@@ -1,3 +1,6 @@
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -26,3 +29,4 @@ vim.o.shiftwidth = 4
 vim.o.undofile = true
 vim.o.smartcase = true
 vim.opt.termguicolors = true
+vim.wo.signcolumn = "yes"
