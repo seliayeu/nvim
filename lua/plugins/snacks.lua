@@ -1,17 +1,41 @@
 return {
   "folke/snacks.nvim",
-  priority = 1000,
   lazy = false,
-  opts = {
-    dashboard = { enabled = true },
-    explorer = {
-      enabled = true,
-      replace_netrw = true,
-    },
-    picker = { enabled = true },
-  },
   keys = {
-    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
-    { "<leader>re", function() Snacks.explorer.reveal() end, desc = "File Explorer" }
+    { "<space>e", function() Snacks.explorer() end },
+  },
+  opts = {
+    bigfile = { enabled = false },
+    dashboard = { enabled = false },
+    explorer = {
+        enabled = false
+    },
+    indent = { enabled = false },
+    input = { enabled = false },
+    notifier = { enabled = false },
+    quickfile = { enabled = false },
+    scope = { enabled = false },
+    scroll = { enabled = false },
+    statuscolumn = { enabled = false },
+    words = { enabled = false },
+    picker = {
+      enabled = true,
+      sources = {
+        explorer = {
+          win = {
+            input = {
+              keys = {
+                ['<C-t>'] = { 'tab', mode = { 'i', 'n' } },
+              },
+            },
+            list = {
+              keys = {
+                ['<C-t>'] = 'tab',
+              },
+            },
+          },
+        },
+      },
+    },
   }
 }
