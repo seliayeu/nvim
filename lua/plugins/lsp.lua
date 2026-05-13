@@ -14,6 +14,23 @@ return {
         }
       }}
     })
+    vim.lsp.config("clangd", {
+      cmd = { "clangd", "--fallback-style=llvm" },
+      init_options = {
+        fallbackFlags = { "-std=c++23" },
+      },
+    })
+    vim.lsp.config("pylsp", {
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              ignore = { "E501" },
+            },
+          },
+        },
+      },
+    })
     vim.keymap.set('n', '<space>cd', vim.diagnostic.open_float)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
     vim.keymap.set('n', 'gD', function()

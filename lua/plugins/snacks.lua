@@ -3,21 +3,36 @@ return {
   lazy = false,
   keys = {
     { "<space>e", function() Snacks.explorer() end },
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+    {
+      "<leader>s/",
+      function()
+        Snacks.picker({
+          finder = "proc",
+          cmd = "fd",
+          args = { "--type", "d", "--exclude", ".git" },
+          title = "Select search directory",
+          layout = { preset = "select" },
+          actions = {
+            confirm = function(picker, item)
+              picker:close()
+              vim.schedule(function()
+                Snacks.picker.grep({ cwd = item.file })
+              end)
+            end,
+          },
+          transform = function(item)
+            item.file = item.text
+            item.dir = true
+          end,
+        })
+      end,
+      desc = "Grep in dir",
+    },
   },
   opts = {
-    bigfile = { enabled = false },
-    dashboard = { enabled = false },
-    explorer = {
-        enabled = false
-    },
-    indent = { enabled = false },
-    input = { enabled = false },
-    notifier = { enabled = false },
-    quickfile = { enabled = false },
-    scope = { enabled = false },
-    scroll = { enabled = false },
-    statuscolumn = { enabled = false },
-    words = { enabled = false },
     picker = {
       enabled = true,
       sources = {
